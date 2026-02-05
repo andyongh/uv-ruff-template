@@ -1,0 +1,18 @@
+FROM python:3.13-slim
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+WORKDIR /app
+
+# Copy workspace config
+COPY pyproject.toml uv.lock ./
+COPY ingestion-service/pyproject.toml ingestion-service/
+
+# Install deps for specific service
+RUN uv sync --frozen --no-dev --package ingestion-service --no-install-project
+
+# Copy code and install
+COPY ingestion-service ./ingestion-service
+
+RUN uv sync --frozen --no-dev --package ingestion-service
+
+CMD ["uv", "run", "python", "-m", "ingestion_service"]
