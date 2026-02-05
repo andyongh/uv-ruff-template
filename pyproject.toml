@@ -29,21 +29,18 @@ select = [
     "C4",     # flake8-comprehensions
     "SIM",    # flake8-simplify
     "TCH",    # flake8-type-checking
+    "PTH",    # flake8-use-pathlib
+    "RUF",    # Ruff-specific rules
+    "PIE",    # flake8-pie
+    "DTZ",    # flake8-datetimez
 ]
 ignore = [
     "E501",   # line too long (handled by formatter)
 ]
 [tool.ruff.lint.isort]
-known-first-party = ["your_project"]
+known-first-party = ["uv_ruff_template"]
 [tool.mypy]
 python_version = "3.13"
 strict = true
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_any_generics = true
-check_untyped_defs = true
-no_implicit_reexport = true
-warn_redundant_casts = true
-warn_unused_ignores = true
+warn_unreachable = true
 ignore_missing_imports = true
